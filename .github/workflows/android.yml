@@ -24,11 +24,22 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Install Android build packages
-        run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdk_root="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
+          if [[ -z "$sdk_root" ]]; then
+            echo "GitHub runner did not define ANDROID_HOME or ANDROID_SDK_ROOT" >&2
+            exit 1
+          fi
+          sdkmanager_path="$(find "$sdk_root/cmdline-tools" -name sdkmanager -type f -print -quit)"
+          if [[ -z "$sdkmanager_path" ]]; then
+            echo "Could not find sdkmanager under $sdk_root/cmdline-tools" >&2
+            exit 1
+          fi
+          yes | "$sdkmanager_path" --licenses >/dev/null
+          "$sdkmanager_path" "platforms;android-34" "build-tools;34.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
