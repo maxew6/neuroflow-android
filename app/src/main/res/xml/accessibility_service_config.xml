@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  No android:packageNames filter on purpose: Android 11+ package visibility rules can silently drop
+  YouTube / TikTok events when a filter is set, and NeuroFlow must also see the launcher come to the
+  foreground so it can collapse the Dynamic Island. Events are filtered by package name in Kotlin.
+
+  typeWindowContentChanged is deliberately NOT requested: Instagram and YouTube fire it dozens of times
+  per second during video playback, and answering each one with a tree scan made the apps stutter.
+  Tab switches arrive as clicks / selections instead, and a low-rate watchdog covers the rest.
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeViewScrolled|typeViewClicked|typeViewSelected"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagDefault|flagIncludeNotImportantViews|flagReportViewIds|flagRetrieveInteractiveWindows"
+    android:canRetrieveWindowContent="true"
+    android:description="@string/accessibility_service_description"
+    android:notificationTimeout="100" />

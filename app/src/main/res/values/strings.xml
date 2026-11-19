@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NeuroFlow</string>
+    <string name="app_tagline">Fewer Reels. Brighter Mind.</string>
+    <string name="accessibility_service_label">NeuroFlow Reel Scroll Sensor</string>
+    <string name="accessibility_service_description">Counts vertical Reel and Shorts swipes in the apps you choose so NeuroFlow can show your live Reel counter and nudge you to take a break. It only reads app names, view ids and scroll events. Nothing leaves your device.</string>
+    <string name="notification_channel_name">NeuroFlow Island</string>
+    <string name="notification_title">NeuroFlow is guarding your focus</string>
+    <string name="notification_text">Fewer Reels. Brighter Mind.</string>
+</resources>
