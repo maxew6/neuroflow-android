@@ -38,7 +38,7 @@ jobs:
             echo "Could not find sdkmanager under $sdk_root/cmdline-tools" >&2
             exit 1
           fi
-          yes | "$sdkmanager_path" --licenses >/dev/null
+          yes | "$sdkmanager_path" --licenses >/dev/null || true
           "$sdkmanager_path" "platforms;android-34" "build-tools;34.0.0"
 
       - name: Set up Gradle
